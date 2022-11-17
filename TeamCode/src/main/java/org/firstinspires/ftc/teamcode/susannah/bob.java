@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.susannah;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import org.firstinspires.ftc.teamcode.subsystems.Drive
 
 @TeleOp
 public class bob extends LinearOpMode {
@@ -30,10 +31,10 @@ public class bob extends LinearOpMode {
                         double speed = -gamepad1.left_stick_y;
                         double turn = gamepad1.right_stick_x;
                         double strafe = gamepad1.left_stick_x;
-                        frontLeft.setPower(speed + turn + strafe);
-                        frontRight.setPower(speed - turn + strafe);
-                        backLeft.setPower(speed + turn - strafe);
-                        backRight.setPower(speed - turn - strafe);
+                        drive.frontLeft.setPower(speed + turn + strafe);
+                        drive.frontRight.setPower(speed - turn + strafe);
+                        drive.backLeft.setPower(speed + turn - strafe);
+                        drive.backRight.setPower(speed - turn - strafe);
 
 //            double x = gamepad1.left_stick_x;
 //            double y = gamepad1.left_stick_y*-1;
