@@ -13,6 +13,7 @@ public class bob extends LinearOpMode {
     private DcMotor grabber;
     private DcMotor cascade;
     private DcMotor susan;
+    private double quantifier = 1
 
     @Override
     public void runOpMode() {
@@ -45,14 +46,15 @@ public class bob extends LinearOpMode {
 //                        backRight.setPower(((-1 * gamepad1.left_stick_y + gamepad1.left_stick_x) - gamepad1.right_stick_x) * speed);
 //                        frontLeft.setPower(((1 * gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) * speed);
 //                        frontRight.setPower(((-1 * gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) * speed);
+                        
 
                         double speed = -gamepad1.left_stick_y;
                         double turn = -gamepad1.right_stick_x;
                         double strafe = gamepad1.left_stick_x;
-                        frontLeft.setPower(speed + turn - strafe);
-                        frontRight.setPower(speed - turn - strafe);
-                        backLeft.setPower(speed + turn + strafe);
-                        backRight.setPower(speed - turn + strafe);
+                        frontLeft.setPower((speed + turn - strafe)quantifier);
+                        frontRight.setPower((speed - turn - strafe)quantifier);
+                        backLeft.setPower((speed + turn + strafe)quantifier);
+                        backRight.setPower((speed - turn + strafe)quantifier);
 
 
                         //Grabber Control
@@ -72,9 +74,9 @@ public class bob extends LinearOpMode {
                         } else if (gamepad1.left_trigger > 0.01) {
                                 cascade.setPower(gamepad1.left_trigger / -3);
                         } else {
-                                cascade.setPower(0.2);
+                                cascade.setPower(0.15);
                         }
-
+`
                         //susan control
                         if (gamepad1.dpad_up) {
                             susan.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -101,6 +103,15 @@ public class bob extends LinearOpMode {
                             }
                             susan.setPower(0);
                         }
+
+                        //speed control
+                        if (gamepad1.dpad_left) {
+                            quantifier = 1
+                        } else if (gamepad1.dpad_right) {
+                            quantifier = 0.4
+                        }
+
+
 
 
 //            double x = gamepad1.left_stick_x;
