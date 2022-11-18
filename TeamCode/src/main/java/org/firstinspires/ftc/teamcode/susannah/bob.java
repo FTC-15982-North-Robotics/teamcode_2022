@@ -16,20 +16,16 @@ public class bob extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-<<<<<<< Updated upstream
+
         frontLeft = hardwareMap.get(DcMotor.class, "leftFront");
         frontRight = hardwareMap.get(DcMotor.class, "rightFront");
         backLeft = hardwareMap.get(DcMotor.class, "leftRear");
         backRight = hardwareMap.get(DcMotor.class, "rightRear");
-=======
-        frontLeft = hardwareMap.get(DcMotor.class, "front_left");
-        frontRight = hardwareMap.get(DcMotor.class, "front_right");
-        backLeft = hardwareMap.get(DcMotor.class, "back_left");
-        backRight = hardwareMap.get(DcMotor.class, "back_right");
+
         grabber = hardwareMap.get(DcMotor.class, "Grabber");
         cascade = hardwareMap.get(DcMotor.class, "Cascade");
         susan = hardwareMap.get(DcMotor.class, "Susan");
->>>>>>> Stashed changes
+
 
         frontLeft.setDirection(DcMotor.Direction.FORWARD);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
@@ -51,19 +47,13 @@ public class bob extends LinearOpMode {
 //                        frontRight.setPower(((-1 * gamepad1.left_stick_y - gamepad1.left_stick_x) - gamepad1.right_stick_x) * speed);
 
                         double speed = -gamepad1.left_stick_y;
-                        double turn = gamepad1.right_stick_x;
+                        double turn = -gamepad1.right_stick_x;
                         double strafe = gamepad1.left_stick_x;
-<<<<<<< Updated upstream
-                        frontLeft.setPower(speed - turn - strafe);
-                        frontRight.setPower(speed + turn - strafe);
-                        backLeft.setPower(speed - turn + strafe);
-                        backRight.setPower(speed + turn + strafe);
-=======
-                        frontLeft.setPower(speed + turn + strafe);
+                        frontLeft.setPower(speed + turn - strafe);
                         frontRight.setPower(speed - turn - strafe);
                         backLeft.setPower(speed + turn + strafe);
-                        backRight.setPower(speed - turn - strafe);
->>>>>>> Stashed changes
+                        backRight.setPower(speed - turn + strafe);
+
 
                         //Grabber Control
                         if (gamepad1.x) {
@@ -82,7 +72,34 @@ public class bob extends LinearOpMode {
                         } else if (gamepad1.left_trigger > 0.01) {
                                 cascade.setPower(gamepad1.left_trigger / -3);
                         } else {
-                                cascade.setPower(0);
+                                cascade.setPower(0.2);
+                        }
+
+                        //susan control
+                        if (gamepad1.dpad_up) {
+                            susan.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                            int haha = susan.getCurrentPosition();
+//                            telemetry.addData("ha", haha);
+//                            int hahaha = haha + 15;
+                            susan.setTargetPosition(30);
+                            susan.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                            while (susan.isBusy()) {
+                                susan.setPower(1);
+                            }
+                            susan.setPower(0);
+                        }
+
+                        if (gamepad1.dpad_down) {
+                            susan.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+//                            int haha = susan.getCurrentPosition();
+//                            telemetry.addData("ha", haha);
+//                            int hahaha = haha - 10;
+                            susan.setTargetPosition(231);
+                            susan.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                            while (susan.isBusy()) {
+                                susan.setPower(1);
+                            }
+                            susan.setPower(0);
                         }
 
 
@@ -204,5 +221,106 @@ public class bob extends LinearOpMode {
 
     public void spinRight() {
         spinRight(1);
+    }
+
+    public void Run_with_encoder() {
+        frontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+    }
+
+    public void run_using_encoder() {
+        frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
+
+    public void run_to_position() {
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+    }
+
+    public void stop_and_reset_encoders() {
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+
+    public void forwardEncoders(double power, int ticks) {
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks);
+        frontRight.setTargetPosition(ticks);
+        backLeft.setTargetPosition(ticks);
+        backRight.setTargetPosition(ticks);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            forward(power);
+        }
+    }
+
+    public void backwardEncoders(double power, int ticks) {
+        ticks = (ticks*-1);
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks);
+        frontRight.setTargetPosition(ticks);
+        backLeft.setTargetPosition(ticks);
+        backRight.setTargetPosition(ticks);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            backward(power);
+        }
+    }
+
+    public void strafeRightEncoders(double power, int ticks) {
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks);
+        frontRight.setTargetPosition(ticks*-1);
+        backLeft.setTargetPosition(ticks*-1);
+        backRight.setTargetPosition(ticks);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            strafeRight(power);
+        }
+    }
+
+    public void strafeLeftEncoders(double power, int ticks) {
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks*-1);
+        frontRight.setTargetPosition(ticks);
+        backLeft.setTargetPosition(ticks);
+        backRight.setTargetPosition(ticks*-1);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            strafeLeft(power);
+        }
+    }
+
+    public void spinLeftEncoders(double power, int ticks) {
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks);
+        frontRight.setTargetPosition(ticks*-1);
+        backLeft.setTargetPosition(ticks);
+        backRight.setTargetPosition(ticks*-1);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            spinLeft(power);
+        }
+    }
+
+    public void spinRightEncoders(double power, int ticks) {
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks*-1);
+        frontRight.setTargetPosition(ticks);
+        backLeft.setTargetPosition(ticks*-1);
+        backRight.setTargetPosition(ticks);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            spinRight(power);
+        }
     }
 }
