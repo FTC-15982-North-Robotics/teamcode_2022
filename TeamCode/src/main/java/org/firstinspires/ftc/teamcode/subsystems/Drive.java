@@ -18,69 +18,69 @@ public class Drive {
         backRight.setDirection(DcMotor.Direction.FORWARD);
     }
 
-    public void strafeLeft(double power) {
+    public void strafeLeftRaw(double power) {
         frontRight.setPower(power);
         backRight.setPower(power*-1);
         frontLeft.setPower(power*-1);
         backLeft.setPower(power);
     }
 
-    public void strafeRight(double power) {
+    public void strafeRightRaw(double power) {
         frontRight.setPower(power*-1);
         backRight.setPower(power);
         frontLeft.setPower(power);
         backLeft.setPower(power*-1);
     }
 
-    public void backward(double power) {
+    public void backwardRaw(double power) {
         frontRight.setPower(power*-1);
         backRight.setPower(power*-1);
         frontLeft.setPower(power*-1);
         backLeft.setPower(power*-1);
     }
 
-    public void forward(double power) {
+    public void forwardRaw(double power) {
         frontRight.setPower(power);
         backRight.setPower(power);
         frontLeft.setPower(power);
         backLeft.setPower(power);
     }
 
-    public void spinLeft(double power) {
+    public void spinLeftRaw(double power) {
         frontRight.setPower(power*-1);
         backRight.setPower(power*-1);
         frontLeft.setPower(power);
         backLeft.setPower(power);
     }
 
-    public void spinRight(double power) {
+    public void spinRightRaw(double power) {
         frontRight.setPower(power);
         backRight.setPower(power);
         frontLeft.setPower(power*-1);
         backLeft.setPower(power*-1);
     }
 
-    public void forward() {
+    public void forwardRaw() {
         forward(1);
     }
 
-    public void strafeLeft() {
+    public void strafeLeftRaw() {
         strafeLeft(1);
     }
 
-    public void strafeRight() {
+    public void strafeRightRaw() {
         strafeRight(1);
     }
 
-    public void backward() {
+    public void backwardRaw() {
         backward(1);
     }
 
-    public void spinLeft() {
+    public void spinLeftRaw() {
         spinLeft(1);
     }
 
-    public void spinRight() {
+    public void spinRightRaw() {
         spinRight(1);
     }
 }
