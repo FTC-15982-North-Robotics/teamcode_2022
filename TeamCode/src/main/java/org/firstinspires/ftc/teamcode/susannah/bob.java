@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode.susannah;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import org.firstinspires.ftc.teamcode.subsystems.Drive
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
 
 @TeleOp
 public class bob extends LinearOpMode {
@@ -85,8 +85,12 @@ public class bob extends LinearOpMode {
 //                                intake.setPower(0);
 //                        }
 
+            /*
+            Intake for 2022-23 season game: Power Play, presented by Raytheon Technologies
+             */
 
             telemetry.update();
         }
     }
 }
+// Hi Susan, good luck :) I believe in you!
