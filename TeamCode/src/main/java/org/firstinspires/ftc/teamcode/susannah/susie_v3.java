@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @Autonomous
-public class susie extends LinearOpMode {
+public class susie_v3 extends LinearOpMode {
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor backLeft;
@@ -32,20 +32,7 @@ public class susie extends LinearOpMode {
         telemetry.addData("Initialized", "Ready to start");
         waitForStart();
 
-        grabber.setPower(0.2);
-        forwardEncoders(0.5, 1100);
-        spinLeftEncoders(0.5, 1000);
-        cascade.setPower(1);
-        sleep(1250);
-        cascade.setPower(0.15);
-        forwardEncoders(0.5, 300);
-        strafeRightEncoders(0.5, 1000);
-        grabber.setPower(-1);
-        sleep(100);
-        grabber.setPower(0);
-        backwardEncoders(1, 2000);
-        spinRightEncoders(1, 1000);
-        backwardEncoders(1, 2000);
+        forwardEncoders(0.2, 1300);
     }
 
 
@@ -209,15 +196,15 @@ public class susie extends LinearOpMode {
     }
 
     public void spinRightEncoders(double power, int ticks){
-            stop_and_reset_encoders();
-            frontLeft.setTargetPosition(ticks * -1);
-            frontRight.setTargetPosition(ticks);
-            backLeft.setTargetPosition(ticks * -1);
-            backRight.setTargetPosition(ticks);
-            run_to_position();
-            while (frontLeft.isBusy()) {
-                spinRight(power);
-            }
+        stop_and_reset_encoders();
+        frontLeft.setTargetPosition(ticks * -1);
+        frontRight.setTargetPosition(ticks);
+        backLeft.setTargetPosition(ticks * -1);
+        backRight.setTargetPosition(ticks);
+        run_to_position();
+        while (frontLeft.isBusy()) {
+            spinRight(power);
+        }
     }
 }
 

@@ -61,7 +61,7 @@ public class bob extends LinearOpMode {
                         if (gamepad1.x) {
                             grabber.setPower(1);
                             sleep(100);
-                            grabber.setPower(0);
+                            grabber.setPower(0.4);
                         } else if (gamepad1.y) {
                             grabber.setPower(-1);
                             sleep(100);
@@ -105,9 +105,9 @@ public class bob extends LinearOpMode {
 //                        }
 
                         if (gamepad1.dpad_left) {
-                            susan.setPower(1);
+                            susan.setPower(0.6);
                         } else if (gamepad1.dpad_right) {
-                            susan.setPower(-1);
+                            susan.setPower(-0.6);
                         } else {
                             susan.setPower(0);
                         }
