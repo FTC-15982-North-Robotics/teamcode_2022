@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Drive {
@@ -10,10 +11,10 @@ public class Drive {
     public DcMotor backRight;
 
     public Drive(HardwareMap hardwareMap) {
-        frontLeft = hardwareMap.get(DcMotor.class, "front_left");
-        frontRight = hardwareMap.get(DcMotor.class, "front_right");
-        backLeft = hardwareMap.get(DcMotor.class, "back_left");
-        backRight = hardwareMap.get(DcMotor.class, "back_right");
+        frontLeft = hardwareMap.get(DcMotorEx.class, "leftFront");
+        backLeft = hardwareMap.get(DcMotorEx.class, "leftRear");
+        backRight = hardwareMap.get(DcMotorEx.class, "rightRear");
+        frontRight = hardwareMap.get(DcMotorEx.class, "rightFront");
 
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.REVERSE);
